@@ -38,7 +38,6 @@ async function getTweetsTodayByProfile(profile) {
         return;
     }
 
-    console.log(response.data)
     let links = []
     for (let index = 0; index < response.data.length; index++) {
 
