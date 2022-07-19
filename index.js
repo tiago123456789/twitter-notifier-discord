@@ -25,7 +25,7 @@ function sleep(seconds) {
     })
 }
 
-async function getTweetsTodayByProfile(profile, initDate, endDate) {
+async function getTweetsByInitDateAndEndDateAndProfile(profile, initDate, endDate) {
     const response = await client.get("tweets/search/recent", {
         query: `from:${profile}`,
         "start_time": initDate,
@@ -67,7 +67,7 @@ schedule.scheduleJob('30 0 * * *', async () => {
     const initDate = (moment().utc().subtract(1, "day").format("YYYY-MM-DDT00:00:00Z"))
     const endDate =  (moment().utc().subtract(1, "day").format("YYYY-MM-DDT23:59:59Z"))
     for (let index = 0; index < profilesToMonitor.length; index++) {
-        await getTweetsTodayByProfile(profilesToMonitor[index], initDate, endDate)
+        await getTweetsByInitDateAndEndDateAndProfile(profilesToMonitor[index], initDate, endDate)
         sleep(1)
     }
 })
